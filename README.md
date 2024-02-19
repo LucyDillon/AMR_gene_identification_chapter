@@ -7,3 +7,6 @@ OG RGI analysis
 any stats files
 
 scripts to make figures
+
+count files md file
+
