@@ -2,11 +2,9 @@
 Scripts used in my first thesis research chapter
 
 Files still needed:
-OG RGI analysis
+
 
 any stats files
-
-scripts to make figures
 
 count files md file
 
