@@ -6,5 +6,5 @@ Files still needed:
 
 any stats files
 
-count files md file
+resfinder storf and count files
 
