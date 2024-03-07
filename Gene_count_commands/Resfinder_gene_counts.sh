@@ -5,13 +5,13 @@
 #### Gene hits are in the 9th column of RGI output txt files, you can use the following command:
 
 ``` 
-cut -f9 *.fna.txt |tr -d "'" | sed '1d' | sort | uniq > RGI_genes.txt 
+cut -f1 *.fna.txt |tr -d "'" | sed '1d' | sort | uniq > Resfinder_genes.txt 
 
 ```
 #### Cut the gene hit columns for each genome:
 
 ```
-for i in *.fna.txt; do cut -f9 $i | tr -d "'" | sed '1d' > $i.txt; done
+for i in *.txt; do cut -f1 $i | tr -d "'" | sed '1d' > $i.txt; done
 ```
  #### Make gene count files:
  #### This shell script makes an output file of the genes and the gene count e.g. if it has a 1 hit, it would be "gene_name 1" 
@@ -24,19 +24,19 @@ for i in *.fna.txt; do cut -f9 $i | tr -d "'" | sed '1d' > $i.txt; done
 #SBATCH --array=1-167%100
 echo $SLURM_ARRAY_TASK_ID
 echo $SLURM_JOB_ID
-cd /mnt/scratch2/users/40309916/RGI_output
+cd /mnt/scratch2/users/40309916/Resfinder_output
 
 
-for i in `ls *.txt.txt | sed -n $(expr $(expr ${SLURM_ARRAY_TASK_ID} \* 100) - 99),$(expr ${SLURM_ARRAY_TASK_ID} \* 100)p`; 
+for i in *.txt.txt; 
 do 
-sh RGI_count_script.sh $i > $i.RGIcount.txt;
+sh Resfinder_count_script.sh $i > $i.Resfindercount.txt;
 done
 ```
-#### RGI_count_script.sh : (to be used in script above)
+#### Resfinder_count_script.sh : (to be used in script above)
 ```
 cat $1 | awk 'BEGIN{ 
     
-    while(( getline line < "RGI_genes.txt") > 0 ) { 
+    while(( getline line < "Resfinder_genes.txt") > 0 ) { 
            array[line]=0; 
            } 
 
